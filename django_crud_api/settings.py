@@ -127,7 +127,15 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_FRAMEWORK = {
-    # Tu configuración existente de DRF
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        # con JWT:
+        # 'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
 
@@ -137,6 +145,34 @@ SPECTACULAR_SETTINGS = {
     'VERSION': '1.0.0',
     'SERVE_INCLUDE_SCHEMA': False,
     # Otras configuraciones opcionales
+    
+    # Configuración de seguridad
+    'SECURITY': [
+        {
+            'basicAuth': [],
+            'cookieAuth': [],
+        }
+    ],
+    
+    # Definir los esquemas de seguridad
+    'SECURITY_DEFINITIONS': {
+        'basicAuth': {
+            'type': 'http',
+            'scheme': 'basic',
+            'description': 'Autenticación básica HTTP'
+        },
+        'cookieAuth': {
+            'type': 'apiKey',
+            'in': 'cookie',
+            'name': 'sessionid',
+            'description': 'Autenticación mediante cookie de sesión'
+        },
+    },
+    
+    # Para incluir JWT u otros métodos
+    'SWAGGER_UI_SETTINGS': {
+         'persistAuthorization': True,  # Mantener la autorización al recargar
+    },
 }
 
 # Cors authorization
