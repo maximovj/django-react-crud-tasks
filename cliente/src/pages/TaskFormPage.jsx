@@ -1,21 +1,29 @@
-import { createTask } from "@/api/task.api";
+import { createTask, deleteTask } from "@/api/task.api";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 export const TaskFormPage = () => {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const navigate = useNavigate();
+  const params = useParams();
 
   const onSubmit = handleSubmit(async (data) => {
     await createTask(data);
     navigate("/tasks");
   });
 
+  const onDelete = async () => {
+    const confirm = window.confirm("¿Seguro que deseas eliminarlo?");
+    if (confirm) {
+      await deleteTask(params.id);
+      navigate("/tasks");
+    }
+  };
   return (
     <div>
       <form onSubmit={onSubmit}>
@@ -40,6 +48,15 @@ export const TaskFormPage = () => {
 
         <input type="submit" value="Crear tarea" />
       </form>
+
+      {params.id && (
+        <button
+          onClick={onDelete}
+          className="inline-flex items-center justify-center px-8 py-4 font-sans font-semibold tracking-wide text-white bg-blue-500 rounded-lg h-[60px]"
+        >
+          Eliminar tarea
+        </button>
+      )}
     </div>
   );
 };
