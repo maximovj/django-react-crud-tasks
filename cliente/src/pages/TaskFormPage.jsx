@@ -60,7 +60,7 @@ export const TaskFormPage = () => {
   }, [params.id, setValue]);
 
   return (
-    <div>
+    <div class="max-w-xl mx-auto">
       <form onSubmit={onSubmit}>
         <input
           {...register("title", { required: true })}
@@ -68,7 +68,7 @@ export const TaskFormPage = () => {
           id="title"
           name="title"
           placeholder="Escribe un título"
-          className="w-[300px] border border-slate-200 rounded-lg py-3 px-5 outline-none	bg-transparent"
+          className="bg-zinc-700 p-3 rounded-lg block w-full mb-3"
         />
         {errors.title && <span>Este campo es requerido</span>}
 
@@ -77,20 +77,26 @@ export const TaskFormPage = () => {
           id="description"
           name="description"
           placeholder="Escribe una descripción"
-          className="w-full p-4 bg-transparent border border-gray-200 rounded-lg outline-none resize-none min-h-[150px]"
+          className="bg-zinc-700 p-3 rounded-lg block w-full mb-3"
         />
         {errors.description && <span>Este campo es requerido</span>}
 
-        <input type="submit" value={btnText()} />
+        <input
+          type="submit"
+          value={btnText()}
+          className="bg-indigo-500 p-3 rounded-lg block w-full mt-3 cursor-pointer"
+        />
       </form>
 
       {params.id && (
-        <button
-          onClick={onDelete}
-          className="inline-flex items-center justify-center px-8 py-4 font-sans font-semibold tracking-wide text-white bg-blue-500 rounded-lg h-[60px]"
-        >
-          Eliminar tarea
-        </button>
+        <div className="flex justify-end">
+          <button
+            onClick={onDelete}
+            className="bg-red-500 p-3 rounded-lg block w-48 mt-3 cursor-pointer"
+          >
+            Eliminar tarea
+          </button>
+        </div>
       )}
     </div>
   );
