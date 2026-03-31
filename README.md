@@ -8,7 +8,7 @@ en lado FrontEnd se usa:  Bun + Vite + ReactJs + Axios + Tailwind CSS
 
 # Comandos
 
-Iniciar el servidor con python + django
+Iniciar el servidor (BackEnd) con python + django
 
 ```shell
 $ ./.venv/Scripts/active.bat # En Windows
@@ -16,7 +16,7 @@ $ source ./.venv/Scripts/active # En GitBash, Linux, MacOS
 $ python manage.py runserver
 ```
 
-Iniciar el servidor con bun + reactjs
+Iniciar el cliente (FrontEnd) con bun + reactjs
 
 ```shell
 $ cd cliente
