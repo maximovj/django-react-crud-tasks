@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export function Navigation() {
   return (
-    <div className="flex justify-between py-3">
+    <div className="grid grid-cols-1 py-3 w-48">
       <Link to="/tasks">
         <h1 className="font-bold text-3xl mb-4 cursor-pointer">Task App</h1>
       </Link>
